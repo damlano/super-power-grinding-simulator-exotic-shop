@@ -6,7 +6,7 @@ This project provides automatic notifications for the Exotic Shop in the Super P
 ## Installation
 1. Clone the repository: `git clone https://github.com/damlano/super-power-grinding-simulator-exotic-shop.git`
 2. Install dependencies: `pip install -r requirements.txt`
-3. add your own webhook to discord_webhook
+3. add your own webhook to config.json
 
 ## Usage
 - Run the notifier: `python main.py`
