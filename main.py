@@ -7,14 +7,20 @@ import requests
 from io import BytesIO
 import numpy as np
 import json
+import warnings
+import sys
 
-# Load the config.json file
 with open('config.json', 'r') as config_file:
     config = json.load(config_file)
 
 discord_webhook = config['discord_webhook']
 delay_per_cycle = config["delay"]
 referance_image_variable = config["reference_image"]
+discord_message = config["discord_message"]
+
+if discord_message == 'put here yours message to display on discord!' or discord_webhook == 'here your discord_webhook':
+    warnings.warn("Warning: config.json has not been edited. Please edit it before running the program.", category=UserWarning)
+    sys.exit(1)
 
 def get_window_pid(title):
     hwnd = win32gui.FindWindow(None, title)
@@ -67,7 +73,7 @@ def send_to_discord(cropped_screenshot):
 
     files = {
         'file': ('screenshot.png', byte_io, 'image/png'),
-        'payload_json': (None, '{"content": "Here\'s the screenshot:"}')
+        'payload_json': (None, f'{{"content": "{discord_message}"}}')
     }
 
     response = requests.post(discord_webhook, files=files)
