@@ -6,8 +6,15 @@ import win32gui, win32process
 import requests
 from io import BytesIO
 import numpy as np
+import json
 
-discord_webhook = f"" # put your own link here
+# Load the config.json file
+with open('config.json', 'r') as config_file:
+    config = json.load(config_file)
+
+discord_webhook = config['discord_webhook']
+delay_per_cycle = config["delay"]
+referance_image_variable = config["reference_image"]
 
 def get_window_pid(title):
     hwnd = win32gui.FindWindow(None, title)
@@ -42,7 +49,7 @@ def calculate_mse(imageA, imageB):
     return err
 
 def check_screenshot(cropped_screenshot):
-    reference_image = Image.open('referance.png')
+    reference_image = Image.open(referance_image_variable)
 
     mse_value = calculate_mse(reference_image, cropped_screenshot)
     mse_threshold = 100
@@ -74,9 +81,9 @@ def send_to_discord(cropped_screenshot):
 
 
 while __name__ == "__main__":
-    time.sleep(30)
+    time.sleep(delay_per_cycle)
     change_to_roblox()
-    cropped_screenshot, discord_screenshot = take_screenshot(2)
+    cropped_screenshot, discord_screenshot = take_screenshot(1)
     if check_screenshot(cropped_screenshot) == True:
         click(980, 110)
         send_to_discord(discord_screenshot)
