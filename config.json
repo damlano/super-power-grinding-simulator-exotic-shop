@@ -1,0 +1,6 @@
+{
+    "delay": 30,
+    "discord_webhook": "here your discord_webhook",
+    "reference_image": "referance.png",
+    "discord_message": "put here yours message to display on discord!"
+}
