@@ -20,8 +20,8 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Acknowledgments
 - Thanks to everyone reading this!
-- 
-MIT License
+
+##  MIT License
 
 Copyright (c) [2024]
 
