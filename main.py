@@ -9,6 +9,9 @@ import numpy as np
 import json
 import warnings
 import sys
+import os
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
 
 with open('config.json', 'r') as config_file:
     config = json.load(config_file)
@@ -28,7 +31,9 @@ def get_window_pid(title):
         threadid, pid = win32process.GetWindowThreadProcessId(hwnd)
         return pid
     else:
-        return None
+        warnings.warn("Warning: roblox not found or not running.", category=UserWarning)
+        sys.exit(1)
+
 
 roblox_pid = get_window_pid('Roblox')
 
@@ -90,6 +95,7 @@ while __name__ == "__main__":
     time.sleep(delay_per_cycle)
     change_to_roblox()
     cropped_screenshot, discord_screenshot = take_screenshot(1)
+    
     if check_screenshot(cropped_screenshot) == True:
         click(980, 110)
         send_to_discord(discord_screenshot)
