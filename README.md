@@ -9,6 +9,7 @@ This project provides automatic notifications for the Exotic Shop in the Super P
 3. add your own webhook to config.json and message (itll shutdown if you didnt)
 
 ## Usage
+- keep the referance image in the same directory then run the script by double clicking main.py
 - Run the notifier: `python main.py`
 - to shutdown close the python window
 
